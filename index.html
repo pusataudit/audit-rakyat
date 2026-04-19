@@ -19,7 +19,7 @@
 </head>
 <body class="p-4 md:p-10">
     <div class="max-w-4xl mx-auto">
-        <div class="header-box">
+        <div class="header-box text-center">
             <h1>PUSAT DATA AUDIT RAKYAT</h1>
             <p class="text-xl font-bold mt-2">PROJECT AUDIT - KERAHASIAAN DIJAMIN 100%</p>
         </div>
@@ -57,30 +57,24 @@
             <input type="text" id="lokasi" placeholder="Sebutkan Kota, Kecamatan, atau Nama Dinas/Instansi" required>
 
             <label>Detail Temuan Audit (Jelaskan Secara Rinci)</label>
-            <textarea id="deskripsi" rows="6" placeholder="Ceritakan apa yang terjadi, siapa yang terlibat, dan berapa perkiraan kerugian negara..."></textarea>
+            <textarea id="deskripsi" rows="6" placeholder="Ceritakan apa yang terjadi secara detail..."></textarea>
 
             <div class="upload-area text-center">
-                <label style="color: #ff0000;">UNGGAH BUKTI FOTO & VIDEO (KUALITAS TINGGI)</label>
+                <label style="color: #ff0000;">UNGGAH BUKTI FOTO & VIDEO</label>
                 <input type="file" id="fileInput" multiple accept="image/*,video/*" class="border-0">
-                <p class="text-sm font-bold mt-1">Anda bisa memilih lebih dari 1 file sekaligus (Maks. 5 file).</p>
+                <p class="text-sm font-bold mt-1">Bisa pilih lebih dari 1 file (Maks. 5 file).</p>
             </div>
 
             <button type="submit" id="submitBtn" class="btn-kirim">Kirim Laporan Ke Pusat Data</button>
         </form>
 
         <div id="status" class="mt-6 text-center hidden text-2xl font-black"></div>
-
-        <div class="mt-20 border-t-8 border-black pt-10 text-center">
-            <h2 class="text-3xl font-black mb-4">LELANG IKLAN STRATEGIS</h2>
-            <p class="text-xl font-bold mb-6">Hubungi Admin untuk pemasangan banner iklan di portal ini.</p>
-            <button class="border-4 border-black p-4 font-black hover:bg-black hover:text-white transition">INFO LELANG IKLAN</button>
-        </div>
     </div>
 
     <script>
-        const scriptURL = 'MASUKKAN_WEB_APP_URL_SHEETS_ANDA_DI_SINI';
-        const cloudName = 'MASUKKAN_CLOUD_NAME_ANDA';
-        const uploadPreset = 'MASUKKAN_UPLOAD_PRESET_ANDA';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxpVKya-bNOqAaYrls52OTQ-nZni7NtD9905aMmhQnSj0SNkuEMBZ7lJKzNbqy4wbYN/exec';
+        const cloudName = 'dz9es8mz9';
+        const uploadPreset = 'GANTI_DENGAN_PRESET_ANDA'; // Masukkan kode preset Anda di sini
 
         const form = document.getElementById('auditForm');
         const btn = document.getElementById('submitBtn');
@@ -94,12 +88,10 @@
             const files = document.getElementById('fileInput').files;
             let fileUrls = [];
 
-            // Proses Upload ke Cloudinary
             for (let i = 0; i < files.length; i++) {
                 const formData = new FormData();
                 formData.append('file', files[i]);
                 formData.append('upload_preset', uploadPreset);
-
                 try {
                     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
                         method: 'POST',
@@ -107,14 +99,10 @@
                     });
                     const resData = await res.json();
                     fileUrls.push(resData.secure_url);
-                } catch (err) {
-                    console.error("Gagal upload file:", err);
-                }
+                } catch (err) { console.error(err); }
             }
 
-            btn.innerHTML = "MENYIMPAN DATA KE SHEETS...";
-
-            // Kirim Data ke Google Sheets
+            btn.innerHTML = "MENYIMPAN DATA...";
             const dataPayload = {
                 nama: document.getElementById('nama').value,
                 whatsapp: document.getElementById('whatsapp').value,
@@ -127,7 +115,7 @@
 
             fetch(scriptURL, { method: 'POST', body: JSON.stringify(dataPayload)})
             .then(res => {
-                statusMsg.innerHTML = "✅ LAPORAN BERHASIL MASUK KE PUSAT DATA!";
+                statusMsg.innerHTML = "✅ LAPORAN BERHASIL MASUK!";
                 statusMsg.classList.remove('hidden');
                 statusMsg.style.color = "green";
                 form.reset();
@@ -135,7 +123,7 @@
                 btn.innerHTML = "Kirim Laporan Ke Pusat Data";
             })
             .catch(err => {
-                statusMsg.innerHTML = "❌ GAGAL MENGIRIM! CEK KONEKSI.";
+                statusMsg.innerHTML = "❌ GAGAL!";
                 statusMsg.classList.remove('hidden');
                 statusMsg.style.color = "red";
                 btn.disabled = false;
