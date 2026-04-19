@@ -8,27 +8,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; }
-        .header-box { border-bottom: 6px solid #000000; padding-bottom: 20px; margin-bottom: 40px; }
-        h1 { font-weight: 900; letter-spacing: -1px; font-size: 2.8rem; line-height: 1.1; }
-        label { display: block; font-weight: 800; font-size: 1.2rem; margin-bottom: 8px; text-transform: uppercase; }
-        input, select, textarea { width: 100%; padding: 15px; border: 3px solid #000000; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; }
-        .btn-kirim { background: #000000; color: #ffffff; padding: 20px; font-weight: 900; font-size: 1.4rem; text-transform: uppercase; width: 100%; cursor: pointer; transition: 0.3s; }
-        .btn-kirim:hover { background: #333333; }
-        .upload-area { border: 3px dashed #ff0000; padding: 20px; background: #fff5f5; margin-bottom: 25px; }
+        .header-box { border-bottom: 8px solid #000000; padding-bottom: 25px; margin-bottom: 45px; }
+        h1 { font-weight: 900; letter-spacing: -1.5px; font-size: 3rem; line-height: 1; text-transform: uppercase; }
+        label { display: block; font-weight: 800; font-size: 1.2rem; margin-bottom: 10px; text-transform: uppercase; color: #000; }
+        input, select, textarea { width: 100%; padding: 18px; border: 4px solid #000000; font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; border-radius: 0px; }
+        input:focus, textarea:focus { background-color: #fffbeb; outline: none; }
+        .btn-kirim { background: #000000; color: #ffffff; padding: 25px; font-weight: 900; font-size: 1.6rem; text-transform: uppercase; width: 100%; cursor: pointer; transition: 0.2s; border: none; }
+        .btn-kirim:hover { background: #333333; transform: scale(1.01); }
+        .upload-area { border: 4px dashed #ff0000; padding: 30px; background: #fff5f5; margin-bottom: 30px; text-align: center; }
+        .footer-ads { margin-top: 60px; padding: 40px; border: 4px solid #000; background: #f3f4f6; text-align: center; }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-4 md:p-12">
     <div class="max-w-4xl mx-auto">
-        <div class="header-box text-center">
-            <h1>PUSAT DATA AUDIT RAKYAT</h1>
-            <p class="text-xl font-bold mt-2">PROJECT AUDIT - KERAHASIAAN DIJAMIN 100%</p>
+        <div class="header-box">
+            <h1>Pusat Data<br>Audit Rakyat</h1>
+            <p class="text-2xl font-black mt-4 bg-black text-white inline-block px-4 py-1">PROJECT AUDIT - TOP SECRET</p>
         </div>
 
         <form id="auditForm">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label>Nama / Inisial</label>
-                    <input type="text" id="nama" placeholder="Contoh: Eka / Anonim" required>
+                    <label>Nama / Inisial Pelapor</label>
+                    <input type="text" id="nama" placeholder="NAMA ANDA / ANONIM" required>
                 </div>
                 <div>
                     <label>Sektor Audit</label>
@@ -38,43 +40,52 @@
                         <option>PERPAJAKAN</option>
                         <option>BIROKRASI</option>
                         <option>KRIMINALITAS</option>
+                        <option>LAINNYA</option>
                     </select>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label>Nomor WhatsApp (Aktif)</label>
-                    <input type="tel" id="whatsapp" placeholder="Contoh: 08123456789" required>
+                    <input type="tel" id="whatsapp" placeholder="08XXXXXXXXXX" required>
                 </div>
                 <div>
-                    <label>Email Pelapor</label>
-                    <input type="email" id="email" placeholder="Contoh: pelapor@email.com">
+                    <label>Email Pelapor (Opsional)</label>
+                    <input type="email" id="email" placeholder="email@anda.com">
                 </div>
             </div>
 
-            <label>Lokasi Kejadian & Instansi</label>
-            <input type="text" id="lokasi" placeholder="Sebutkan Kota, Kecamatan, atau Nama Dinas/Instansi" required>
+            <label>Lokasi Kejadian & Instansi Terkait</label>
+            <input type="text" id="lokasi" placeholder="CONTOH: KABUPATEN A - DINAS PEKERJAAN UMUM" required>
 
-            <label>Detail Temuan Audit (Jelaskan Secara Rinci)</label>
-            <textarea id="deskripsi" rows="6" placeholder="Ceritakan apa yang terjadi secara detail..."></textarea>
+            <label>Detail Temuan Audit (Kronologi Lengkap)</label>
+            <textarea id="deskripsi" rows="7" placeholder="JELASKAN TEMUAN ANDA SECARA RINCI DI SINI..." required></textarea>
 
-            <div class="upload-area text-center">
-                <label style="color: #ff0000;">UNGGAH BUKTI FOTO & VIDEO</label>
-                <input type="file" id="fileInput" multiple accept="image/*,video/*" class="border-0">
-                <p class="text-sm font-bold mt-1">Bisa pilih lebih dari 1 file (Maks. 5 file).</p>
+            <div class="upload-area">
+                <label style="color: #ff0000; font-size: 1.5rem;">UNGGAH BUKTI FOTO / VIDEO</label>
+                <p class="font-bold mb-4 italic text-gray-700">Bukti harus tajam/jelas untuk keperluan verifikasi cetak A4.</p>
+                <input type="file" id="fileInput" multiple accept="image/*,video/*" class="cursor-pointer font-bold">
+                <p class="text-sm font-bold mt-2 text-red-600 uppercase">Maksimal 5 File Sekaligus</p>
             </div>
 
             <button type="submit" id="submitBtn" class="btn-kirim">Kirim Laporan Ke Pusat Data</button>
         </form>
 
-        <div id="status" class="mt-6 text-center hidden text-2xl font-black"></div>
+        <div id="status" class="mt-8 text-center hidden text-3xl font-black p-6 border-4"></div>
+
+        <div class="footer-ads">
+            <h2 class="text-3xl font-black mb-2 uppercase italic">Ruang Iklan Strategis</h2>
+            <p class="text-xl font-bold mb-6">Slot ini tersedia untuk publikasi bisnis atau pengumuman resmi.</p>
+            <button class="border-4 border-black px-10 py-4 font-black text-xl hover:bg-black hover:text-white transition uppercase">Hubungi Admin</button>
+        </div>
     </div>
 
     <script>
+        // DATA KUNCI EKA
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxpVKya-bNOqAaYrls52OTQ-nZni7NtD9905aMmhQnSj0SNkuEMBZ7lJKzNbqy4wbYN/exec';
         const cloudName = 'dz9es8mz9';
-        const uploadPreset = 'GANTI_DENGAN_PRESET_ANDA'; // Masukkan kode preset Anda di sini
+        const uploadPreset = 'm6x8jz8g'; 
 
         const form = document.getElementById('auditForm');
         const btn = document.getElementById('submitBtn');
@@ -83,26 +94,34 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             btn.disabled = true;
-            btn.innerHTML = "SEDANG MENGUNGGAH BUKTI...";
+            btn.innerHTML = "MENGUNGGAH BUKTI (JANGAN TUTUP HALAMAN)...";
 
             const files = document.getElementById('fileInput').files;
             let fileUrls = [];
 
+            // Proses Upload Foto/Video ke Cloudinary
             for (let i = 0; i < files.length; i++) {
                 const formData = new FormData();
                 formData.append('file', files[i]);
                 formData.append('upload_preset', uploadPreset);
+
                 try {
                     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
                         method: 'POST',
                         body: formData
                     });
                     const resData = await res.json();
-                    fileUrls.push(resData.secure_url);
-                } catch (err) { console.error(err); }
+                    if(resData.secure_url) {
+                        fileUrls.push(resData.secure_url);
+                    }
+                } catch (err) {
+                    console.error("Gagal upload:", err);
+                }
             }
 
-            btn.innerHTML = "MENYIMPAN DATA...";
+            btn.innerHTML = "MENYIMPAN LAPORAN KE PUSAT DATA...";
+
+            // Kirim Data Lengkap ke Google Sheets
             const dataPayload = {
                 nama: document.getElementById('nama').value,
                 whatsapp: document.getElementById('whatsapp').value,
@@ -115,16 +134,19 @@
 
             fetch(scriptURL, { method: 'POST', body: JSON.stringify(dataPayload)})
             .then(res => {
-                statusMsg.innerHTML = "✅ LAPORAN BERHASIL MASUK!";
+                statusMsg.innerHTML = "✅ LAPORAN BERHASIL DITERIMA DAN DIKUNCI!";
                 statusMsg.classList.remove('hidden');
+                statusMsg.style.borderColor = "green";
                 statusMsg.style.color = "green";
                 form.reset();
                 btn.disabled = false;
                 btn.innerHTML = "Kirim Laporan Ke Pusat Data";
+                window.scrollTo(0, document.body.scrollHeight);
             })
             .catch(err => {
-                statusMsg.innerHTML = "❌ GAGAL!";
+                statusMsg.innerHTML = "❌ GAGAL MENGIRIM! CEK KONEKSI.";
                 statusMsg.classList.remove('hidden');
+                statusMsg.style.borderColor = "red";
                 statusMsg.style.color = "red";
                 btn.disabled = false;
                 btn.innerHTML = "Kirim Laporan Ke Pusat Data";
