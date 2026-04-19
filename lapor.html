@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORMULIR AUDIT RAKYAT</title>
+    <style>
+        body { font-family: sans-serif; background: #0b0f19; color: white; padding: 20px; text-align: center; }
+        .container { max-width: 600px; margin: auto; background: #111827; padding: 20px; border-radius: 8px; border: 1px solid #374151; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #1f2937; border: 1px solid #4b5563; color: white; border-radius: 4px; box-sizing: border-box; }
+        button { background: #ef4444; color: white; border: none; padding: 15px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 4px; margin-top: 10px; }
+        button:hover { background: #dc2626; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>KIRIM LAPORAN [AUDIT RAKYAT]</h1>
+        <p>Gunakan Analisa 5W+1H untuk akurasi data.</p>
+        <form>
+            <select>
+                <option>-- Pilih Sektor --</option>
+                <option>Korupsi</option>
+                <option>Kriminal</option>
+                <option>Infrastruktur</option>
+                <option>Birokrasi</option>
+            </select>
+            <input type="text" placeholder="Wilayah Presisi (Contoh: RT 02, Desa X, Kec. Y)">
+            <textarea rows="6" placeholder="Apa masalahnya? Siapa pelakunya? Kapan terjadi?"></textarea>
+            <input type="text" placeholder="Estimasi Kerugian (Contoh: 500 Juta)">
+            <button type="button" onclick="alert('Laporan sedang dienkripsi dan diproses oleh sistem Hydra.')">KIRIM AUDIT SEKARANG</button>
+        </form>
+    </div>
+</body>
+</html>
