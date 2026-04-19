@@ -1,142 +1,176 @@
-<div class="bg-slate-800/40 p-6 rounded-3xl border border-slate-700 shadow-inner">
-    <p class="text-emerald-400 font-black text-xs uppercase mb-6 tracking-widest border-b border-slate-700 pb-2 flex justify-between">
-        <span>Lokasi Otoritas Administratif</span>
-        <span class="text-slate-500">Data Terverifikasi API</span>
-    </p>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-            <label class="label-audit">Provinsi</label>
-            <select id="provinsi" class="input-style" onchange="loadKota()">
-                <option value="">Memuat Provinsi...</option>
-            </select>
-        </div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Data Audit - Investigasi Rakyat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 0; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; }
+        .input-style { background: #1e293b; border: 2px solid #334155; border-radius: 12px; padding: 12px; width: 100%; color: white; transition: 0.3s; }
+        .input-style:focus { border-color: #38bdf8; outline: none; }
+        .label-audit { display: block; text-transform: uppercase; font-size: 10px; font-weight: 800; color: #94a3b8; margin-bottom: 6px; margin-left: 4px; }
+        .btn-primary { background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%); padding: 16px; border-radius: 12px; font-weight: 800; text-transform: uppercase; width: 100%; cursor: pointer; border: none; color: white; }
+    </style>
+</head>
+<body class="p-4 md:p-12 min-h-screen">
+    <div class="max-w-4xl mx-auto glass-card p-8 md:p-12 shadow-2xl">
+        <header class="mb-10">
+            <h1 class="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent uppercase tracking-tighter">Portal Investigasi Nasional</h1>
+            <p class="text-slate-400 text-sm italic">Audit Terstruktur & Otoritas Wilayah</p>
+        </header>
 
-        <div>
-            <label class="label-audit">Kabupaten / Kota</label>
-            <select id="kota" class="input-style" onchange="loadKecamatan()" disabled>
-                <option value="">Pilih Provinsi Terlebih Dahulu</option>
-            </select>
-        </div>
+        <form id="auditForm" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="label-audit">Pelapor / Inisial</label>
+                    <input type="text" id="nama" class="input-style" placeholder="Nama Anda" required>
+                </div>
+                <div>
+                    <label class="label-audit">WhatsApp Aktif</label>
+                    <input type="tel" id="whatsapp" class="input-style" placeholder="08..." required>
+                </div>
+            </div>
 
-        <div>
-            <label class="label-audit">Kecamatan (Wilayah Camat)</label>
-            <select id="kecamatan" class="input-style" onchange="loadKelurahan()" disabled>
-                <option value="">Pilih Kota/Kab Terlebih Dahulu</option>
-            </select>
-        </div>
+            <div class="bg-slate-800/40 p-6 rounded-3xl border border-slate-700 shadow-inner">
+                <p class="text-emerald-400 font-black text-xs uppercase mb-6 tracking-widest border-b border-slate-700 pb-2">Lokasi Otoritas Administratif</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="label-audit">Provinsi</label>
+                        <select id="provinsi" class="input-style" onchange="loadKota()">
+                            <option value="">Memuat...</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-audit">Kabupaten / Kota</label>
+                        <select id="kota" class="input-style" onchange="loadKecamatan()" disabled>
+                            <option value="">Pilih Provinsi Dahulu</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-audit">Kecamatan (Camat)</label>
+                        <select id="kecamatan" class="input-style" onchange="loadKelurahan()" disabled>
+                            <option value="">Pilih Kota Dahulu</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-audit">Kelurahan / Desa (Lurah/Kades)</label>
+                        <select id="kelurahan" class="input-style" disabled>
+                            <option value="">Pilih Kecamatan Dahulu</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-audit">RW / Dusun / Lingkungan</label>
+                        <input type="text" id="rw" class="input-style" placeholder="Detail Wilayah Terkecil">
+                    </div>
+                    <div>
+                        <label class="label-audit">Instansi Terlapor</label>
+                        <select id="tipeEntitas" class="input-style">
+                            <option value="PEMERINTAH_DAERAH">PEMERINTAH DAERAH (KOTA/KAB)</option>
+                            <option value="PEMERINTAH_PUSAT">PEMERINTAH PUSAT (KEMENTERIAN)</option>
+                            <option value="BUMN_BUMD">BUMN / BUMD</option>
+                            <option value="SWASTA">PERUSAHAAN SWASTA</option>
+                            <option value="LSM_PARPOL">LSM / YAYASAN / PARPOL</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-        <div>
-            <label class="label-audit">Kelurahan / Desa (Wilayah Lurah/Kades)</label>
-            <select id="kelurahan" class="input-style" disabled>
-                <option value="">Pilih Kecamatan Terlebih Dahulu</option>
-            </select>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="label-audit">Sektor Audit</label>
+                    <select id="kategori" class="input-style">
+                        <option value="KORUPSI">KORUPSI & GRATIFIKASI</option>
+                        <option value="INFRASTRUKTUR">INFRASTRUKTUR / FISIK</option>
+                        <option value="PENDIDIKAN">PENDIDIKAN</option>
+                        <option value="BANSOS">DANA DESA / BANSOS</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="label-audit">Estimasi Kerugian (Rp)</label>
+                    <input type="number" id="kerugian" class="input-style" placeholder="Input Angka Saja">
+                </div>
+            </div>
 
-        <div>
-            <label class="label-audit">RW / Dusun / Lingkungan</label>
-            <input type="text" id="rw" class="input-style" placeholder="Input Detail Wilayah Terkecil">
-        </div>
+            <div>
+                <label class="label-audit">Kronologi & Temuan Audit</label>
+                <textarea id="deskripsi" rows="4" class="input-style" placeholder="Jelaskan temuan Anda secara mendalam..."></textarea>
+            </div>
 
-        <div>
-            <label class="label-audit">Instansi Terlapor</label>
-            <select id="tipeEntitas" class="input-style">
-                <option value="PEMERINTAH_DAERAH">PEMERINTAH DAERAH (KOTA/KAB)</option>
-                <option value="PEMERINTAH_PUSAT">PEMERINTAH PUSAT (KEMENTERIAN)</option>
-                <option value="BUMN_BUMD">BUMN / BUMD</option>
-                <option value="SWASTA">PERUSAHAAN SWASTA</option>
-                <option value="LSM_PARPOL">LSM / YAYASAN / PARPOL</option>
-            </select>
-        </div>
+            <div class="p-6 border-2 border-dashed border-blue-500/30 rounded-2xl bg-blue-500/5 text-center">
+                <label class="block text-blue-400 font-bold mb-3 uppercase text-xs">Lampiran Bukti (Dokumen/Foto)</label>
+                <input type="file" id="fileInput" multiple accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx" class="text-slate-400 text-xs">
+            </div>
+
+            <button type="button" onclick="submitData()" class="btn-primary">Kirim Laporan Audit</button>
+        </form>
     </div>
-</div>
 
-<script>
-// API Sumber Data Wilayah Indonesia (Seluruh Indonesia)
-const API_BASE = 'https://www.emsifa.com/api-wilayah-indonesia/api';
+    <script>
+        const API_BASE = 'https://www.emsifa.com/api-wilayah-indonesia/api';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwy3PfCc4gIWkywnkE7vTvC77JYSvFhF7G_emjILVJYFS0ko7tqLDOQoajsulJE5ddj/exec';
 
-// 1. Inisialisasi: Ambil Semua Provinsi saat halaman dibuka
-window.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const res = await fetch(`${API_BASE}/provinces.json`);
-        const provinces = await res.json();
-        let html = '<option value="">-- PILIH PROVINSI --</option>';
-        provinces.forEach(p => {
-            html += `<option value="${p.id}" data-name="${p.name}">${p.name}</option>`;
-        });
-        document.getElementById('provinsi').innerHTML = html;
-    } catch (e) { console.error("Gagal memuat data wilayah"); }
-});
+        // LOGIKA WILAYAH
+        window.onload = async () => {
+            const res = await fetch(`${API_BASE}/provinces.json`);
+            const data = await res.json();
+            let opt = '<option value="">-- PILIH PROVINSI --</option>';
+            data.forEach(p => opt += `<option value="${p.id}" data-name="${p.name}">${p.name}</option>`);
+            document.getElementById('provinsi').innerHTML = opt;
+        };
 
-// 2. Fungsi Load Kota/Kabupaten
-async function loadKota() {
-    const provId = document.getElementById('provinsi').value;
-    const kotaSelect = document.getElementById('kota');
-    if (!provId) return;
+        async function loadKota() {
+            const id = document.getElementById('provinsi').value;
+            const res = await fetch(`${API_BASE}/regencies/${id}.json`);
+            const data = await res.json();
+            let opt = '<option value="">-- PILIH KOTA --</option>';
+            data.forEach(p => opt += `<option value="${p.id}" data-name="${p.name}">${p.name}</option>`);
+            const s = document.getElementById('kota'); s.innerHTML = opt; s.disabled = false;
+        }
 
-    kotaSelect.innerHTML = '<option>Memuat...</option>';
-    kotaSelect.disabled = false;
+        async function loadKecamatan() {
+            const id = document.getElementById('kota').value;
+            const res = await fetch(`${API_BASE}/districts/${id}.json`);
+            const data = await res.json();
+            let opt = '<option value="">-- PILIH KECAMATAN --</option>';
+            data.forEach(p => opt += `<option value="${p.id}" data-name="${p.name}">${p.name}</option>`);
+            const s = document.getElementById('kecamatan'); s.innerHTML = opt; s.disabled = false;
+        }
 
-    const res = await fetch(`${API_BASE}/regencies/${provId}.json`);
-    const regencies = await res.json();
-    let html = '<option value="">-- PILIH KOTA/KABUPATEN --</option>';
-    regencies.forEach(r => {
-        html += `<option value="${r.id}" data-name="${r.name}">${r.name}</option>`;
-    });
-    kotaSelect.innerHTML = html;
-}
+        async function loadKelurahan() {
+            const id = document.getElementById('kecamatan').value;
+            const res = await fetch(`${API_BASE}/villages/${id}.json`);
+            const data = await res.json();
+            let opt = '<option value="">-- PILIH KELURAHAN --</option>';
+            data.forEach(p => opt += `<option value="${p.id}" data-name="${p.name}">${p.name}</option>`);
+            const s = document.getElementById('kelurahan'); s.innerHTML = opt; s.disabled = false;
+        }
 
-// 3. Fungsi Load Kecamatan
-async function loadKecamatan() {
-    const kotaId = document.getElementById('kota').value;
-    const kecSelect = document.getElementById('kecamatan');
-    if (!kotaId) return;
+        async function submitData() {
+            const getSel = (id) => {
+                const el = document.getElementById(id);
+                return el.options[el.selectedIndex]?.getAttribute('data-name') || "";
+            }
 
-    kecSelect.innerHTML = '<option>Memuat...</option>';
-    kecSelect.disabled = false;
+            const payload = {
+                nama: document.getElementById('nama').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                provinsi: getSel('provinsi'),
+                kota: getSel('kota'),
+                kecamatan: getSel('kecamatan'),
+                kelurahan: getSel('kelurahan'),
+                rw: document.getElementById('rw').value,
+                tipeEntitas: document.getElementById('tipeEntitas').value,
+                kategori: document.getElementById('kategori').value,
+                kerugian: document.getElementById('kerugian').value,
+                deskripsi: document.getElementById('deskripsi').value
+            };
 
-    const res = await fetch(`${API_BASE}/districts/${kotaId}.json`);
-    const districts = await res.json();
-    let html = '<option value="">-- PILIH KECAMATAN --</option>';
-    districts.forEach(d => {
-        html += `<option value="${d.id}" data-name="${d.name}">${d.name}</option>`;
-    });
-    kecSelect.innerHTML = html;
-}
-
-// 4. Fungsi Load Kelurahan
-async function loadKelurahan() {
-    const kecId = document.getElementById('kecamatan').value;
-    const kelSelect = document.getElementById('kelurahan');
-    if (!kecId) return;
-
-    kelSelect.innerHTML = '<option>Memuat...</option>';
-    kelSelect.disabled = false;
-
-    const res = await fetch(`${API_BASE}/villages/${kecId}.json`);
-    const villages = await res.json();
-    let html = '<option value="">-- PILIH KELURAHAN --</option>';
-    villages.forEach(v => {
-        html += `<option value="${v.id}" data-name="${v.name}">${v.name}</option>`;
-    });
-    kelSelect.innerHTML = html;
-}
-
-// SAAT SUBMIT: Pastikan yang terkirim ke Google Sheets adalah NAMA, bukan ID Angka
-async function getFormData() {
-    const getSelName = (id) => {
-        const el = document.getElementById(id);
-        return el.options[el.selectedIndex]?.getAttribute('data-name') || "";
-    };
-
-    return {
-        provinsi: getSelName('provinsi'),
-        kota: getSelName('kota'),
-        kecamatan: getSelName('kecamatan'),
-        kelurahan: getSelName('kelurahan'),
-        rw: document.getElementById('rw').value,
-        tipeEntitas: document.getElementById('tipeEntitas').value,
-        // ... field lainnya (nama, wa, deskripsi, kerugian, linkBukti)
-    };
-}
-</script>
+            fetch(scriptURL, { method: 'POST', body: JSON.stringify(payload) })
+            .then(() => alert("Laporan Berhasil Dikirim dan Dikunci!"));
+        }
+    </script>
+</body>
+</html>
