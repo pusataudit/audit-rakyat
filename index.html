@@ -3,107 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audit Rakyat - Pusat Laporan Digital</title>
+    <title>PORTAL AUDIT RAKYAT - DATA CENTER</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; }
-        .main-title { font-size: 2.5rem; font-weight: 800; color: #000000; letter-spacing: -0.02em; }
-        label { font-size: 1.1rem !important; font-weight: 700 !important; color: #000000 !important; }
-        input, select, textarea { font-size: 1.1rem !important; color: #000000 !important; border: 2px solid #e5e7eb !important; }
-        input:focus, select:focus, textarea:focus { border-color: #000000 !important; ring: 0 !important; }
+        .header-box { border-bottom: 6px solid #000000; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { font-weight: 900; letter-spacing: -1px; font-size: 2.8rem; line-height: 1.1; }
+        label { display: block; font-weight: 800; font-size: 1.2rem; margin-bottom: 8px; text-transform: uppercase; }
+        input, select, textarea { width: 100%; padding: 15px; border: 3px solid #000000; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; }
+        .btn-kirim { background: #000000; color: #ffffff; padding: 20px; font-weight: 900; font-size: 1.4rem; text-transform: uppercase; width: 100%; cursor: pointer; transition: 0.3s; }
+        .btn-kirim:hover { background: #333333; }
+        .upload-area { border: 3px dashed #ff0000; padding: 20px; background: #fff5f5; margin-bottom: 25px; }
     </style>
 </head>
 <body class="p-4 md:p-10">
-    <div class="max-w-3xl mx-auto">
-        <header class="mb-12 text-left border-b-4 border-black pb-6">
-            <h1 class="main-title mb-2">PUSAT DATA AUDIT RAKYAT</h1>
-            <p class="text-xl text-gray-800 font-medium">Sistem Pelaporan Transparansi dan Audit Independen.</p>
-        </header>
-
-        <div class="bg-white p-2">
-            <form id="auditForm" class="space-y-8">
-                <div>
-                    <label class="block mb-2">Nama Pelapor / Inisial</label>
-                    <input type="text" id="nama" class="w-full p-4 bg-white rounded-lg outline-none transition" placeholder="Masukkan nama atau anonim" required>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block mb-2">Sektor Audit</label>
-                        <select id="kategori" class="w-full p-4 bg-white rounded-lg outline-none cursor-pointer">
-                            <option>Korupsi</option>
-                            <option>Infrastruktur</option>
-                            <option>Pajak</option>
-                            <option>Birokrasi</option>
-                            <option>Lainnya</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block mb-2">Lokasi Kejadian</label>
-                        <input type="text" id="lokasi" class="w-full p-4 bg-white rounded-lg outline-none" placeholder="Kota atau Instansi">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block mb-2">Detail Laporan Temuan</label>
-                    <textarea id="deskripsi" rows="5" class="w-full p-4 bg-white rounded-lg outline-none" placeholder="Tuliskan detail temuan audit Anda di sini..." required></textarea>
-                </div>
-
-                <div>
-                    <label class="block mb-2 text-red-600">Link Bukti Foto / Video</label>
-                    <input type="text" id="linkBukti" class="w-full p-4 bg-white rounded-lg outline-none mb-2 border-red-200" placeholder="Tempel link bukti di sini (Google Drive/Cloudinary/dll)">
-                    <p class="text-sm text-gray-600 font-bold">*Pastikan link bisa diakses untuk keperluan verifikasi.</p>
-                </div>
-
-                <button type="submit" id="submitBtn" class="w-full bg-black text-white text-xl font-bold py-5 rounded-lg hover:bg-gray-900 transition duration-300 uppercase tracking-wider shadow-xl">
-                    Kirim Laporan Sekarang
-                </button>
-            </form>
-            <div id="msg" class="mt-6 text-center hidden text-xl font-bold"></div>
+    <div class="max-w-4xl mx-auto">
+        <div class="header-box">
+            <h1>PUSAT DATA AUDIT RAKYAT</h1>
+            <p class="text-xl font-bold mt-2">PROJECT AUDIT - KERAHASIAAN DIJAMIN 100%</p>
         </div>
 
-        <div class="mt-16 p-10 border-4 border-black rounded-lg text-center bg-gray-50">
-            <p class="text-black font-extrabold text-lg mb-2 uppercase">Ruang Iklan Strategis</p>
-            <p class="text-gray-700 mb-4">Ingin memasang iklan di portal audit rakyat? Hubungi kami segera.</p>
-            <a href="#" class="inline-block border-2 border-black px-6 py-2 font-bold hover:bg-black hover:text-white transition">INFO LELANG IKLAN</a>
+        <form id="auditForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label>Nama / Inisial</label>
+                    <input type="text" id="nama" placeholder="Contoh: Eka / Anonim" required>
+                </div>
+                <div>
+                    <label>Sektor Audit</label>
+                    <select id="kategori">
+                        <option>KORUPSI</option>
+                        <option>INFRASTRUKTUR</option>
+                        <option>PERPAJAKAN</option>
+                        <option>BIROKRASI</option>
+                        <option>KRIMINALITAS</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label>Nomor WhatsApp (Aktif)</label>
+                    <input type="tel" id="whatsapp" placeholder="Contoh: 08123456789" required>
+                </div>
+                <div>
+                    <label>Email Pelapor</label>
+                    <input type="email" id="email" placeholder="Contoh: pelapor@email.com">
+                </div>
+            </div>
+
+            <label>Lokasi Kejadian & Instansi</label>
+            <input type="text" id="lokasi" placeholder="Sebutkan Kota, Kecamatan, atau Nama Dinas/Instansi" required>
+
+            <label>Detail Temuan Audit (Jelaskan Secara Rinci)</label>
+            <textarea id="deskripsi" rows="6" placeholder="Ceritakan apa yang terjadi, siapa yang terlibat, dan berapa perkiraan kerugian negara..."></textarea>
+
+            <div class="upload-area text-center">
+                <label style="color: #ff0000;">UNGGAH BUKTI FOTO & VIDEO (KUALITAS TINGGI)</label>
+                <input type="file" id="fileInput" multiple accept="image/*,video/*" class="border-0">
+                <p class="text-sm font-bold mt-1">Anda bisa memilih lebih dari 1 file sekaligus (Maks. 5 file).</p>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-kirim">Kirim Laporan Ke Pusat Data</button>
+        </form>
+
+        <div id="status" class="mt-6 text-center hidden text-2xl font-black"></div>
+
+        <div class="mt-20 border-t-8 border-black pt-10 text-center">
+            <h2 class="text-3xl font-black mb-4">LELANG IKLAN STRATEGIS</h2>
+            <p class="text-xl font-bold mb-6">Hubungi Admin untuk pemasangan banner iklan di portal ini.</p>
+            <button class="border-4 border-black p-4 font-black hover:bg-black hover:text-white transition">INFO LELANG IKLAN</button>
         </div>
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxpVKya-bNOqAaYrls52OTQ-nZni7NtD9905aMmhQnSj0SNkuEMBZ7lJKzNbqy4wbYN/exec';
+        const scriptURL = 'MASUKKAN_WEB_APP_URL_SHEETS_ANDA_DI_SINI';
+        const cloudName = 'MASUKKAN_CLOUD_NAME_ANDA';
+        const uploadPreset = 'MASUKKAN_UPLOAD_PRESET_ANDA';
+
         const form = document.getElementById('auditForm');
         const btn = document.getElementById('submitBtn');
-        const msg = document.getElementById('msg');
+        const statusMsg = document.getElementById('status');
 
-        form.addEventListener('submit', e => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             btn.disabled = true;
-            btn.innerHTML = 'MENGIRIM DATA...';
-            
-            const rawData = {
+            btn.innerHTML = "SEDANG MENGUNGGAH BUKTI...";
+
+            const files = document.getElementById('fileInput').files;
+            let fileUrls = [];
+
+            // Proses Upload ke Cloudinary
+            for (let i = 0; i < files.length; i++) {
+                const formData = new FormData();
+                formData.append('file', files[i]);
+                formData.append('upload_preset', uploadPreset);
+
+                try {
+                    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const resData = await res.json();
+                    fileUrls.push(resData.secure_url);
+                } catch (err) {
+                    console.error("Gagal upload file:", err);
+                }
+            }
+
+            btn.innerHTML = "MENYIMPAN DATA KE SHEETS...";
+
+            // Kirim Data ke Google Sheets
+            const dataPayload = {
                 nama: document.getElementById('nama').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                email: document.getElementById('email').value,
                 kategori: document.getElementById('kategori').value,
                 lokasi: document.getElementById('lokasi').value,
                 deskripsi: document.getElementById('deskripsi').value,
-                linkBukti: document.getElementById('linkBukti').value
+                linkBukti: fileUrls.join(", ")
             };
 
-            fetch(scriptURL, { method: 'POST', body: JSON.stringify(rawData)})
-            .then(response => {
-                msg.innerHTML = "✅ DATA BERHASIL MASUK KE PUSAT DATA!";
-                msg.classList.remove('hidden', 'text-red-600');
-                msg.classList.add('text-green-700');
+            fetch(scriptURL, { method: 'POST', body: JSON.stringify(dataPayload)})
+            .then(res => {
+                statusMsg.innerHTML = "✅ LAPORAN BERHASIL MASUK KE PUSAT DATA!";
+                statusMsg.classList.remove('hidden');
+                statusMsg.style.color = "green";
                 form.reset();
                 btn.disabled = false;
-                btn.innerHTML = 'Kirim Laporan Sekarang';
+                btn.innerHTML = "Kirim Laporan Ke Pusat Data";
             })
-            .catch(error => {
-                msg.innerHTML = "❌ GAGAL! PERIKSA KONEKSI ANDA.";
-                msg.classList.remove('hidden');
-                msg.classList.add('text-red-600');
+            .catch(err => {
+                statusMsg.innerHTML = "❌ GAGAL MENGIRIM! CEK KONEKSI.";
+                statusMsg.classList.remove('hidden');
+                statusMsg.style.color = "red";
                 btn.disabled = false;
-                btn.innerHTML = 'Kirim Laporan Sekarang';
+                btn.innerHTML = "Kirim Laporan Ke Pusat Data";
             });
         });
     </script>
