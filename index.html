@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISTEM AUDIT RAKYAT - PROFESSIONAL EDITION</title>
+    <title>SISTEM AUDIT RAKYAT - PRO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -12,61 +12,72 @@
         .input-style { background: #1e293b; border: 2px solid #334155; border-radius: 12px; padding: 14px; width: 100%; color: white; transition: 0.3s; }
         .input-style:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
         .btn-primary { background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%); padding: 16px; border-radius: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; width: 100%; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4); }
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
     </style>
 </head>
-<body class="p-4 md:p-12 min-h-screen flex items-center justify-center">
+<body class="p-4 md:p-12 min-h-screen">
 
-    <div class="max-w-4xl w-full glass-card p-8 md:p-12 shadow-2xl">
-        <header class="mb-10 text-center md:text-left">
-            <h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent mb-2">PUSAT DATA AUDIT</h1>
-            <p class="text-slate-400 font-medium">Sistem Pelaporan Independen & Anti-Manipulasi Data</p>
+    <div class="max-w-4xl mx-auto glass-card p-8 md:p-12 shadow-2xl">
+        <header class="mb-10">
+            <h1 class="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent mb-2">PUSAT DATA AUDIT</h1>
+            <p class="text-slate-400 font-medium italic">"Data Terkunci, Bukti Abadi, Keadilan Teruji"</p>
         </header>
 
         <form id="auditForm" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-bold text-slate-300 mb-2 uppercase">Identitas / Inisial</label>
-                    <input type="text" id="nama" class="input-style" placeholder="Nama Anda atau Anonim" required>
+                    <label class="block text-sm font-bold text-slate-300 mb-2 uppercase text-xs">Nama / Inisial</label>
+                    <input type="text" id="nama" class="input-style" placeholder="Anonim / Nama" required>
                 </div>
                 <div>
-                    <label class="block text-sm font-bold text-slate-300 mb-2 uppercase">Sektor Temuan</label>
+                    <label class="block text-sm font-bold text-slate-300 mb-2 uppercase text-xs">Sektor Audit</label>
                     <select id="kategori" class="input-style">
-                        <option>KORUPSI</option>
-                        <option>INFRASTRUKTUR</option>
-                        <option>PERPAJAKAN</option>
-                        <option>BIROKRASI</option>
-                        <option>LAINNYA</option>
+                        <optgroup label="KEUANGAN & HUKUM">
+                            <option value="KORUPSI">KORUPSI & GRATIFIKASI</option>
+                            <option value="PERPAJAKAN">PERPAJAKAN & BEA CUKAI</option>
+                            <option value="PENCUCIAN_UANG">PENCUCIAN UANG (TPPU)</option>
+                        </optgroup>
+                        <optgroup label="INFRASTRUKTUR & ALAM">
+                            <option value="INFRASTRUKTUR">PROYEK FISIK (JALAN/GEDUNG)</option>
+                            <option value="LINGKUNGAN">TAMBANG / LINGKUNGAN</option>
+                            <option value="PERTANAHAN">SENGKETA TANAH / AGRARIA</option>
+                        </optgroup>
+                        <optgroup label="LAYANAN PUBLIK">
+                            <option value="PENDIDIKAN">PENDIDIKAN (DANA BOS/BEASISWA)</option>
+                            <option value="KESEHATAN">KESEHATAN (ALKES/BPJS)</option>
+                            <option value="BANSOS">DANA DESA / BANSOS</option>
+                            <option value="BIROKRASI">PUNGUTAN LIAR / PERIZINAN</option>
+                        </optgroup>
+                        <option value="LAINNYA">LAIN-LAIN</option>
                     </select>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-bold text-slate-300 mb-2 uppercase">WhatsApp Aktif</label>
-                    <input type="tel" id="whatsapp" class="input-style" placeholder="08XXXXXXXXXX" required>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-1">
+                    <label class="block text-sm font-bold text-slate-300 mb-2 uppercase text-xs">WhatsApp</label>
+                    <input type="tel" id="whatsapp" class="input-style" placeholder="08..." required>
                 </div>
-                <div>
-                    <label class="block text-sm font-bold text-slate-300 mb-2 uppercase">Email (Opsional)</label>
-                    <input type="email" id="email" class="input-style" placeholder="pelapor@email.com">
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-bold text-slate-300 mb-2 uppercase text-xs">Estimasi Nilai Kerugian (Rp)</label>
+                    <input type="number" id="kerugian" class="input-style" placeholder="Contoh: 500000000 (Hanya Angka)" required>
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-bold text-slate-300 mb-2 uppercase">Lokasi Kejadian & Instansi</label>
-                <input type="text" id="lokasi" class="input-style" placeholder="Sebutkan Kota/Kabupaten & Nama Dinas" required>
+                <label class="block text-sm font-bold text-slate-300 mb-2 uppercase text-xs">Lokasi & Instansi Terkait</label>
+                <input type="text" id="lokasi" class="input-style" placeholder="Kabupaten/Kota - Nama Instansi" required>
             </div>
 
             <div>
-                <label class="block text-sm font-bold text-slate-300 mb-2 uppercase">Detail Investigasi (Kronologi)</label>
-                <textarea id="deskripsi" rows="5" class="input-style" placeholder="Jelaskan temuan audit Anda secara rinci..." required></textarea>
+                <label class="block text-sm font-bold text-slate-300 mb-2 uppercase text-xs">Kronologi Temuan Audit</label>
+                <textarea id="deskripsi" rows="5" class="input-style" placeholder="Jelaskan secara mendalam..." required></textarea>
             </div>
 
             <div class="p-6 border-2 border-dashed border-slate-700 rounded-2xl bg-slate-800/50 text-center">
-                <label class="block text-blue-400 font-bold mb-3 uppercase">Lampiran Bukti (Foto, Video, PDF, Excel)</label>
+                <label class="block text-blue-400 font-bold mb-3 uppercase text-sm">Lampiran Dokumen Bukti (PDF, XLS, FOTO, VIDEO)</label>
                 <input type="file" id="fileInput" multiple accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx" class="text-slate-400 text-sm">
-                <p class="mt-2 text-xs text-slate-500 font-medium">Maksimal 5 file pendukung berkualitas tinggi.</p>
+                <p class="mt-2 text-xs text-slate-500">Maksimal 5 file pendukung.</p>
             </div>
 
             <button type="button" onclick="showPreview()" class="btn-primary">Tinjau Laporan (Preview)</button>
@@ -75,11 +86,11 @@
 
     <div id="previewModal" class="modal">
         <div class="bg-slate-900 border border-slate-700 p-8 rounded-3xl max-w-2xl w-full shadow-2xl">
-            <h2 class="text-2xl font-black mb-6 border-b border-slate-800 pb-4">KONFIRMASI DATA AUDIT</h2>
-            <div id="previewContent" class="space-y-4 text-slate-300 leading-relaxed"></div>
+            <h2 class="text-2xl font-black mb-6 border-b border-slate-800 pb-4">VERIFIKASI DATA AUDIT</h2>
+            <div id="previewContent" class="space-y-4 text-slate-300"></div>
             <div class="flex flex-col md:flex-row gap-4 mt-10">
-                <button onclick="closePreview()" class="w-full p-4 rounded-xl border-2 border-slate-700 font-bold hover:bg-slate-800 transition">EDIT KEMBALI</button>
-                <button id="publishBtn" onclick="submitData()" class="w-full btn-primary bg-emerald-600">PUBLISH & KUNCI DATA</button>
+                <button onclick="closePreview()" class="w-full p-4 rounded-xl border-2 border-slate-700 font-bold hover:bg-slate-800 transition">EDIT</button>
+                <button id="publishBtn" onclick="submitData()" class="w-full btn-primary bg-emerald-600">PUBLISH & KUNCI</button>
             </div>
         </div>
     </div>
@@ -87,10 +98,10 @@
     <div id="successModal" class="modal">
         <div class="bg-slate-900 border border-emerald-500/50 p-10 rounded-3xl max-w-md w-full text-center shadow-2xl">
             <div class="w-20 h-20 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
-            <h2 class="text-2xl font-black mb-2 uppercase tracking-widest">Laporan Diterima</h2>
-            <p class="text-slate-400 mb-6">Nomor ID Pelaporan Anda:</p>
-            <div id="reportIDDisplay" class="text-4xl font-black py-4 bg-slate-800 border-2 border-emerald-500 rounded-2xl text-emerald-400 mb-8 tracking-tighter"></div>
-            <button onclick="location.reload()" class="w-full p-4 bg-white text-black font-black rounded-xl uppercase">Selesai</button>
+            <h2 class="text-2xl font-black mb-2 uppercase">LAPORAN TERKUNCI</h2>
+            <p class="text-slate-400 mb-6 font-bold">SIMPAN ID LAPORAN ANDA:</p>
+            <div id="reportIDDisplay" class="text-4xl font-black py-4 bg-slate-800 border-2 border-emerald-500 rounded-2xl text-emerald-400 mb-8"></div>
+            <button onclick="location.reload()" class="w-full p-4 bg-white text-black font-black rounded-xl uppercase">SELESAI</button>
         </div>
     </div>
 
@@ -99,19 +110,22 @@
         const cloudName = 'dz9es8mz9';
         const uploadPreset = 'm6x8jz8g';
 
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(angka);
+        }
+
         function showPreview() {
             const content = `
-                <div class="grid grid-cols-2 gap-4">
-                    <p><span class="text-slate-500 text-xs uppercase block">Pelapor:</span> <b>${document.getElementById('nama').value}</b></p>
-                    <p><span class="text-slate-500 text-xs uppercase block">Sektor:</span> <b>${document.getElementById('kategori').value}</b></p>
-                    <p><span class="text-slate-500 text-xs uppercase block">Lokasi:</span> <b>${document.getElementById('lokasi').value}</b></p>
-                    <p><span class="text-slate-500 text-xs uppercase block">WhatsApp:</span> <b>${document.getElementById('whatsapp').value}</b></p>
+                <div class="grid grid-cols-2 gap-4 text-sm uppercase">
+                    <p><span class="text-slate-500">Pelapor:</span> <b>${document.getElementById('nama').value}</b></p>
+                    <p><span class="text-slate-500">Sektor:</span> <b>${document.getElementById('kategori').value}</b></p>
+                    <p><span class="text-slate-500">Lokasi:</span> <b>${document.getElementById('lokasi').value}</b></p>
+                    <p class="text-emerald-400"><span class="text-slate-500">Estimasi Kerugian:</span> <b>${formatRupiah(document.getElementById('kerugian').value)}</b></p>
                 </div>
                 <div class="mt-4 pt-4 border-t border-slate-800">
-                    <span class="text-slate-500 text-xs uppercase block">Ringkasan Temuan:</span>
+                    <p class="text-slate-500 text-xs mb-2 uppercase">Kronologi:</p>
                     <p class="italic">"${document.getElementById('deskripsi').value.substring(0, 200)}..."</p>
                 </div>
-                <p class="mt-4 text-emerald-400 font-bold">✓ ${document.getElementById('fileInput').files.length} File bukti siap dienkripsi.</p>
             `;
             document.getElementById('previewContent').innerHTML = content;
             document.getElementById('previewModal').style.display = 'flex';
@@ -121,7 +135,7 @@
 
         async function submitData() {
             const btn = document.getElementById('publishBtn');
-            btn.disabled = true; btn.innerHTML = "MENGUNCI DATA...";
+            btn.disabled = true; btn.innerHTML = "MENYIMPAN...";
             
             const files = document.getElementById('fileInput').files;
             let fileUrls = [];
@@ -130,22 +144,21 @@
                 const formData = new FormData();
                 formData.append('file', file);
                 formData.append('upload_preset', uploadPreset);
-                formData.append('resource_type', 'auto'); // Otomatis deteksi PDF/Excel/Foto
-
+                formData.append('resource_type', 'auto');
                 try {
                     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, { method: 'POST', body: formData });
                     const resData = await res.json();
                     fileUrls.push(resData.secure_url);
-                } catch (err) { console.error("Upload error", err); }
+                } catch (err) { console.error(err); }
             }
 
             const data = {
                 nama: document.getElementById('nama').value,
                 whatsapp: document.getElementById('whatsapp').value,
-                email: document.getElementById('email').value,
                 kategori: document.getElementById('kategori').value,
                 lokasi: document.getElementById('lokasi').value,
                 deskripsi: document.getElementById('deskripsi').value,
+                kerugian: document.getElementById('kerugian').value, // DATA KERUGIAN
                 linkBukti: fileUrls.join(", ")
             };
 
