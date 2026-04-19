@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD KONTROL - AUDIT RAKYAT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f4f4f4; color: #000; }
+        .audit-table { width: 100%; border-collapse: collapse; background: #white; border: 3px solid #000; }
+        th { background: #000; color: #fff; padding: 12px; text-align: left; text-transform: uppercase; }
+        td { border: 2px solid #000; padding: 10px; font-weight: 600; font-size: 0.9rem; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        @media print { .no-print { display: none; } body { background: white; } }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-6xl mx-auto bg-white p-6 shadow-2xl border-4 border-black">
+        <div class="flex justify-between items-center border-b-8 border-black pb-4 mb-6">
+            <div>
+                <h1 class="text-3xl font-black uppercase">Monitoring Audit Rakyat</h1>
+                <p class="font-bold">Laporan Masuk & Status Investigasi Lapangan</p>
+            </div>
+            <button onclick="window.print()" class="no-print bg-black text-white px-6 py-2 font-black border-2 border-black hover:bg-white hover:text-black transition">PRINT PDF/LAPORAN</button>
+        </div>
+
+        <div class="no-print mb-6 flex gap-4">
+            <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Cari Lokasi, Sektor, atau Nama..." class="border-4 border-black p-3 w-full font-bold outline-none">
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="audit-table" id="reportTable">
+                <thead>
+                    <tr>
+                        <th>Tgl Masuk</th>
+                        <th>ID Laporan</th>
+                        <th>Sektor</th>
+                        <th>Lokasi</th>
+                        <th>Nama/Kontak</th>
+                        <th>Bukti Dokumen</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxpVKya-bNOqAaYrls52OTQ-nZni7NtD9905aMmhQnSj0SNkuEMBZ7lJKzNbqy4wbYN/exec';
+
+        async function loadData() {
+            try {
+                const response = await fetch(scriptURL.replace('exec', 'exec?action=read'));
+                const data = await response.json();
+                const tableBody = document.getElementById('tableBody');
+                
+                // Mulai dari baris ke-1 (lewati header sheet)
+                for (let i = 1; i < data.length; i++) {
+                    const row = data[i];
+                    const tr = document.createElement('tr');
+                    
+                    // Buat link bukti yang bisa diklik
+                    let buktiLinks = "-";
+                    if (row[7]) { // Kolom H: Link Bukti
+                        buktiLinks = row[7].split(", ").map((link, idx) => 
+                            `<a href="${link}" target="_blank" class="text-blue-600 underline">File ${idx+1}</a>`
+                        ).join(" | ");
+                    }
+
+                    tr.innerHTML = `
+                        <td>${new Date(row[0]).toLocaleDateString('id-ID')}</td>
+                        <td class="bg-yellow-100">${row[8] || 'N/A'}</td>
+                        <td>${row[4]}</td>
+                        <td>${row[5]}</td>
+                        <td>${row[1]} <br> <span class="text-xs text-gray-500">${row[2]}</span></td>
+                        <td>${buktiLinks}</td>
+                        <td class="font-black text-red-600">${row[9] || 'OPEN'}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                }
+            } catch (error) {
+                console.error("Gagal mengambil data:", error);
+            }
+        }
+
+        function filterTable() {
+            let input = document.getElementById("filterInput");
+            let filter = input.value.toUpperCase();
+            let table = document.getElementById("reportTable");
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName("td");
+                let found = false;
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j].innerText.toUpperCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+                tr[i].style.display = found ? "" : "none";
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
